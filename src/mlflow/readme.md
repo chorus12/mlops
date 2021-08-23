@@ -38,6 +38,8 @@ Look either directly there or in `rfcmodel/run_RFCmodel.py` in order to see how 
 
 The MLflow tracking APIs logs information about each training run, which includes hyperparameters `n_estimators`, `max_features` and `max_depth` and the metrics `accuracy`, `precision`, `recall`, `f1` and `auc`.
 By default, wherever you run your program, the tracking API writes data into files into a local `./mlruns` directory.
+![](img/model_page.png)
+### Models comparing
 ![](img/ui.png)
 ![](img/model_ui.png)
 
@@ -82,7 +84,7 @@ The MLflow Model Registry component is a centralized model store, set of APIs, a
     run_id="d16076a3ec534311817565e6527539c0")
 
     ```
-After registering model you can set model stage
+After registering model you can set model stage at model page
 ![](img/model.png)
 ## Model serving
 After you have registered an MLflow model, you can serve the model as a service on your host.

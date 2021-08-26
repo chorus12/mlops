@@ -1,0 +1,7 @@
+name: DiabetesML
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    command: "python run_RFCmodel.py"

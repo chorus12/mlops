@@ -188,3 +188,7 @@ This section describes how to specify Conda and Docker container environments in
       ```
 ## Running projects
 MLflow provides two ways to run projects: the mlflow run `command-line tool`, or the `mlflow.projects.run()`
+
+To run project use this command:
+
+`mlflow run`

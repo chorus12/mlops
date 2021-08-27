@@ -4,4 +4,6 @@ conda_env: conda.yaml
 
 entry_points:
   main:
-    command: "python run_RFCmodel.py"
+    parameters:
+      depth: {type: int, default: 1}
+    command: "python project_run.py"

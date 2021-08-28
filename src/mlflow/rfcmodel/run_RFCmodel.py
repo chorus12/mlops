@@ -5,7 +5,6 @@ import mlflow.sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-import boto3
 from tqdm import tqdm
 from sklearn.metrics import (
     accuracy_score,

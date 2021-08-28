@@ -129,5 +129,66 @@ MLflow also has a CLI that supports the following commands:
     ```
 
 * `predict` uses the model to generate a prediction for a local CSV or JSON file. Note that this method only supports DataFrame input.
+# MLFlow projects
+An MLflow Project is a format for packaging data science code in a reusable and reproducible way, based primarily on conventions. In addition, the Projects component includes an API and command-line tools for running projects, making it possible to chain together projects into workflows.
 
+MLflow currently supports the following project environments: 
+* Conda environment 
+* Docker container environment 
+* System environment
+## MLproject file
+You can get more control over an MLflow Project by adding an `MLproject` file, which is a text file in `YAML` syntax, to the project’s root directory. The following is an example of an `MLproject` file:
+```
+name: My Project
 
+conda_env: my_env.yaml
+# Can have a docker_env instead of a conda_env, e.g.
+# docker_env:
+#    image:  mlflow-docker-example
+
+entry_points:
+  main:
+    parameters:
+      data_file: path
+      regularization: {type: float, default: 0.1}
+    command: "python train.py -r {regularization} {data_file}"
+  validate:
+    parameters:
+      data_file: path
+    command: "python validate.py {data_file}"
+```
+The file can specify a name and a Conda or Docker environment, as well as more detailed information about each entry point. Specifically, each entry point defines a command to run and parameters to pass to the command (including data types).
+## Specifying the environment
+This section describes how to specify Conda and Docker container environments in an MLproject file. MLproject files cannot specify both a Conda environment and a Docker environment.
+* Conda environment
+    
+    Include a top-level `conda_env` entry in the `MLproject` file. The value of this entry must be a relative path to a Conda environment YAML file within the MLflow project’s directory. In the following example:
+    
+    `conda_env: files/config/conda_environment.yaml`
+* Docker container environment
+    
+    Include a top-level `docker_env` entry in the `MLproject` file. The value of this entry must be the name of a Docker image that is accessible on the system executing the project; this image name may include a registry path and tags. Here are a couple of examples.
+    * Image without a registry path
+    
+        `docker_env:
+            image: mlflow-docker-example-environment`
+    * Mounting volumes and specifying environment variables
+        
+        ```
+      docker_env:
+              image: mlflow-docker-example-environment
+              volumes: ["/local/path:/container/mount/path"]
+              environment: [["NEW_ENV_VAR", "new_var_value"], "VAR_TO_COPY_FROM_HOST_ENVIRONMENT"]
+      ```
+    * Image in a remote registry
+    
+        ```
+        docker_env:
+            image: 012345678910.dkr.ecr.us-west-2.amazonaws.com/mlflow-docker-example-environment:7.0
+      ```
+## Running projects
+MLflow provides two ways to run projects: the mlflow run `command-line tool`, or the `mlflow.projects.run()`
+
+To run project use this command:
+
+`mlflow run`

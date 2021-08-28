@@ -1,8 +1,8 @@
 Setup environment
 ----------------------------------
 
-1. ```git clone  or git clone ```
-2. `cd <your_cloned_directory>/`
+1. ```git clone https://github.com/chorus12/mlops ```
+2. `cd src/mlflow/rfcmodel`
 3. Install MLflow and the required Python modules within your [conda activated environment](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) or [pipenv environment](https://pypi.org/project/pipenv) if using it
     * `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
 

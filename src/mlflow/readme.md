@@ -192,6 +192,7 @@ MLflow provides two ways to run projects: the mlflow run `command-line tool`, or
 To run project use this command:
 
 `mlflow run https://github.com/plaguedoctor39/mlflowproject-test -P depth=5`
+
 Output:
 ```
 ...

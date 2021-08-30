@@ -59,12 +59,17 @@ Supports:
   <tr>
     <td>User authentication </td>
     <td>Open source mlflow doesn’t support that. You get that functionality in Databricks</td>
-    <td>Yes</td>
+    <td>+</td>
   </tr>
   <tr>
     <td>Projects</td>
     <td>You can run project locally from your computer </td>
     <td>Only on teradata server</td>
+  </tr>
+  <tr>
+  <td>Model monitoring</td>
+  <td>Open source mlflow doesn't support that. You get that functionality by using <a href="https://evidentlyai.com/">evidently</a></td>
+  <td>+</td>
   </tr>
   
 </table>

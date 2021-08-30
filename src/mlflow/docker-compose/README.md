@@ -69,7 +69,7 @@ If you change the `aws_secret_access_key` in `.env` file - make appropriate chan
 5. Train a sample MLflow model
 
     ```bash
-    mlflow run https://github.com/chorus12/mlops/src/mlflow/rfcmodel -P depth=5
+    mlflow run https://github.com/plaguedoctor39/mlflowproject-test -P depth=5
     ```
     
     * Note: To fix ModuleNotFoundError: No module named 'boto3'
@@ -82,7 +82,7 @@ If you change the `aws_secret_access_key` in `.env` file - make appropriate chan
         ```
     * Or you can try running:  
     ```bash
-    mlflow run https://github.com/chorus12/mlops/src/mlflow/rfcmodel -P depth=5 --no-conda
+    mlflow run https://github.com/plaguedoctor39/mlflowproject-test -P depth=5 --no-conda
     ```
     if you have all dependencies in current environment.
  
@@ -94,5 +94,5 @@ If you change the `aws_secret_access_key` in `.env` file - make appropriate chan
  
  7. You can check the input with this command
     ```bash
-    curl -X POST -H "Content-Type:application/json; format=pandas-split" --data '{"columns":['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'],"data":[[6, 148, 72, 35, 0, 33.6, 0.627, 50]]}' http://127.0.0.1:1234/invocations
+    curl -X POST -H "Content-Type:application/json" --data '[{"Pregnancies": 6, "Glucose": 148, "BloodPressure": 72, "SkinThickness": 35, "Insulin": 0, "BMI": 33.6, "DiabetesPedigreeFunction": 0.627, "Age": 50}]' http://127.0.0.1:1234/invocations
     ```

@@ -191,4 +191,11 @@ MLflow provides two ways to run projects: the mlflow run `command-line tool`, or
 
 To run project use this command:
 
-`mlflow run`
+`mlflow run https://github.com/plaguedoctor39/mlflowproject-test -P depth=5`
+Output:
+```
+...
+...
+INFO mlflow.projects: === Run (ID '59e4456c246542988b6c478debd22f57') succeeded ===
+```
+Now you can use command `mlflow ui` to see if there is our run

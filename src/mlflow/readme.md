@@ -1,21 +1,25 @@
-# MLFlow models tracking
+# MLFlow comprehensive review  
+This readme aims for a decent but yet compact review of mlflow.  
+One can run a fully functional mlflow instance with docker compose - see [docker-compose](./docker-compose) folder for instructions.  
 
 ----------------------------------
 
 ## Server architecture
 ![](img/example4.png)
+**How to launch a tracking server:**  
 `mlflow server -h 0.0.0.0 --backend-store-uri postgresql://<your_postgres_user>:<password>@localhost/<db_name> --default-artifact-root <your_s3_bucket>`
 * `-h 0.0.0.0` means thats it's not gonna be local server and everyone can access to it
 * `--backend-store-uri` is where MLflow Tracking Server stores experiment and run metadata as well as params, metrics, and tags for runs.
 * `--default-artifact-root` to configure default location to server’s artifact store. 
 
-## Experiment
-Experiment contains metadata and artifacts
+## Experiment tracking
+Tracking server main purpose it to keep track of DS experiments.  
+Experiment contains metadata and artifacts.  
 ![](img/experiment.png)
 
 
 ## Tracking
-Look either directly there or in `rfcmodel/run_RFCmodel.py` in order to see how the code must be written in order to work with MLflow:
+[Code snippet](./rfcmodel/run_RFCmodel.py) shows api calls to track experiments:
    ```
     mlflow.set_tracking_uri("http://localhost:5000") 
     ...
@@ -39,16 +43,14 @@ Look either directly there or in `rfcmodel/run_RFCmodel.py` in order to see how 
 The MLflow tracking APIs logs information about each training run, which includes hyperparameters `n_estimators`, `max_features` and `max_depth` and the metrics `accuracy`, `precision`, `recall`, `f1` and `auc`.
 By default, wherever you run your program, the tracking API writes data into files into a local `./mlruns` directory.
 ![](img/model_page.png)
-### Models comparing
+### Comparing models
 ![](img/ui.png)
 ![](img/model_ui.png)
 
-
-
 # MLFlow models
-An MLflow Model is a standard format for packaging machine learning models that can be used in a variety of downstream tools—for example, real-time serving through a REST API or batch inference on Apache Spark. The format defines a convention that lets you save a model in different “flavors” that can be understood by different downstream tools.
+An MLflow Model is a standard format for packaging ML code so that can be used in a variety of downstream tools—for like **real-time serving through a REST API** or **batch inference on Apache Spark**. The format defines a convention that lets you save a model in different “flavors” that can be understood by different downstream tools.
 
-----------------------------------
+--
 
 ## Model registry
 The MLflow Model Registry component is a centralized model store, set of APIs, and UI, to collaboratively manage the full lifecycle of an MLflow Model. It provides model lineage (which MLflow experiment and run produced the model), model versioning, stage transitions (for example from staging to production), and annotations.
@@ -98,8 +100,9 @@ export MLFLOW_TRACKING_URI=http://localhost:5000
 mlflow models serve -m "models:/Diabetes_RFCmodel/Production"
 ```
 ![](img/model_serving.png)
-![](img/mode_request.png)
-## Inferencing deployed models
+![](img/mode_request.png)  
+
+## Inferencing with deployed models
 MLflow can deploy models locally as local REST API endpoints or to directly score files. In addition, MLflow can package models as self-contained Docker images with the REST API endpoint. The image can be used to safely deploy the model to various environments such as Kubernetes.
 
 You deploy MLflow model locally or generate a Docker image using the CLI interface to the `mlflow.models` module.
@@ -199,4 +202,4 @@ Output:
 ...
 INFO mlflow.projects: === Run (ID '59e4456c246542988b6c478debd22f57') succeeded ===
 ```
-Now you can use command `mlflow ui` to see if there is our run
+You can use run `mlflow ui` to see recorded run

@@ -4,75 +4,61 @@
 **MLOps is a set of best practices that revolve around making machine learning in production more seamless**
 
 This picture was taken from  [state-of-mlops](https://ml-ops.org/content/state-of-mlops)
-# MLFlow vs AOA
-Here's our comparison MLFlow with AOA
-<table>
-  <tr>
-    <td></td>
-    <td>MLFlow</td>
-    <td>AOA</td>
-  </tr>
-  <tr>
-    <td>Experiment tracking and comparison</td>
-    <td>Realized with MLflow Tracking API+UI
-Can be used within code and notebooks
-Automatically keeps track of parameters, metrics, code, and models from each expirement</td>
-    <td>AOA is not about tracking, there is no tracking API, by the way after training and evaluating model you will get some statistics (metrics, graphics, datasets) of your model</td>
-  </tr>
-  <tr>
-    <td>Code repository</td>
-    <td>?</td>
-    <td>Git</td>
-  </tr>
-  <tr>
-    <td>Model registry</td>
-    <td>In UI or API</td>
-    <td>UI</td>
-  </tr>
-  <tr>
-    <td>Storage</td>
-    <td>MLflow Tracking Server offers two types of storage:
-- database-backed store: experiment and run metadata as well as params, metrics, and tags for runs
-- file store: large data, log of artifact output (eg models)
+# MLOps toolkit comparison
 
-Supports:
-- local file paths, NFS, NFTP
-- Amazon S3, Azure Blob Storage, Google Cloud Storage</td>
-    <td>Only one type of storage: 
-- Amazon S3</td>
-  </tr>
-  <tr>
-    <td>Logging and debugging</td>
-    <td>Automatic logging via mlflow.autolog()  Library-specific auto log calls available (eg pytorch, fastai, scikit-learn..) Runs can be annotated via tags No specific debugging information found </td>
-    <td>No automatic logging Runs can be annotated via tags No specific debugging information found </td>
-  </tr>
-  <tr>
-    <td>Visualization</td>
-    <td>Good GUI to compare and select models Experiment-based run listing and comparison Searching for runs by parameter or metric value Visualizing run metrics Downloading run results</td>
-    <td>Same as MLFlow but you can’t search for runs by parameter or metric value</td>
-  </tr>
-  <tr>
-    <td>Model serving</td>
-    <td>Served via concept of flavors, thus models can be processed by different downstream tools Variety of tools to deploy models (eg. a TensorFlow model can be loaded as a TensorFlow DAG, or as a Python function to apply to input data.) Tools to deploy many common model types to diverse platforms: e.g model supporting the «Python function» flavor can be deployed to a Docker-based REST server or to cloud platforms such as Azure ML and AWS </td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>User authentication </td>
-    <td>Open source mlflow doesn’t support that. You get that functionality in Databricks</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td>Projects</td>
-    <td>You can run project locally from your computer </td>
-    <td>Only on teradata server</td>
-  </tr>
-  <tr>
-  <td>Model monitoring</td>
-  <td>Open source mlflow doesn't support that. You get that functionality by using <a href="https://evidentlyai.com/">evidently</a></td>
-  <td>+</td>
-  </tr>
-  
-</table>
+
+| Comparison Item                                                        | MLFlow                                                                                                                                      | AOA                                                                    |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Experiment tracking**                                                    |                                                                                                                                             |                                                                        |
+| Track experiments with api calls                                       | yes                                                                                                                                         | yes                                                                    |
+| Store experiment in metadata                                           | yes                                                                                                                                         | yes                                                                    |
+| Metadaba backend                                                       | mysql, mssql, sqlite, and postgresql                                                                                                        | h2, mysql, postgresql, mssql                                           |
+| Experiment tracking UI                                                 | yes                                                                                                                                         | yes                                                                    |
+| Experiment annotation                                                  | yes                                                                                                                                         | only tags and comment on approval                                      |
+| Experiment comparison                                                  | yes                                                                                                                                         | yes                                                                    |
+| Save graphics with experiments                                         | yes                                                                                                                                         | yes                                                                    |
+| Passing parameters into ml code (training/evaluation)                  | yes                                                                                                                                         | yes                                                                    |
+| Enironments support                                                    | yes, conda and docker                                                                                                                       | yes, docker                                                            |
+| **Code repo**                                                              |                                                                                                                                             |                                                                        |
+| Package ml code into projects with fixed file/folder structure         | yes                                                                                                                                         | yes                                                                    |
+| Clone code from git                                                    | yes                                                                                                                                         | yes                                                                    |
+| Monitor changes in ml repo                                             | no                                                                                                                                          | yes                                                                    |
+| **Artifact storage**                                                       |                                                                                                                                             |                                                                        |
+| Storage types supported                                                | S3-compatible,<br>Azure Blob Storage,<br>Google Cloud Storage,<br>FTP server, SFTP Server, NFS, HDFS                                        | Jfrog Artifactory,  S3-compatible                                      |
+| Proxy access to artifacts in UI                                        | yes                                                                                                                                         | yes                                                                    |
+| **Dataset support**                                                        |                                                                                                                                             |                                                                        |
+| Supports dataset definitions                                           | no                                                                                                                                          | yes                                                                    |
+| Connection types                                                       | n/a                                                                                                                                         | Vantage, S3, Hadoop and a custom type of connections                   |
+| Credentials support                                                    | n/a                                                                                                                                         | Username/password, Kerberos, AWS Secrets and Kubernetes as credentials |
+| Dataset versions                                                       | n/a                                                                                                                                         | yes                                                                    |
+| Dataset templates                                                      | n/a                                                                                                                                         | yes                                                                    |
+| **Model Lifecycle**                                                        |                                                                                                                                             |                                                                        |
+| Support model registry                                                 | yes                                                                                                                                         | yes                                                                    |
+| Available model statuses                                               | staging, production, archive                                                                                                                | Trained, Evaluated, Deployed, Retired, Approved, Rejected              |
+| Lineage support                                                        | stated in doc but not clear how                                                                                                             | yes                                                                    |
+| Integration with BPM                                                   | no                                                                                                                                          | yes, JBPM support                                                      |
+| Trigger model events on status change, code change in repo             | no                                                                                                                                          | yes                                                                    |
+| **Model serving**                                                          |                                                                                                                                             |                                                                        |
+| Support model serving                                                  | yes                                                                                                                                         | yes                                                                    |
+| Default model serving engine                                           | conda env, gunicorn                                                                                                                         | docker, gunicorn                                                       |
+| Batch scoring support                                                  | yes                                                                                                                                         | yes                                                                    |
+| AirFlow integration for batch scoring                                  | no                                                                                                                                          | yes                                                                    |
+| Cloud deployment                                                       | yes: AzureML, Sagemaker                                                                                                                     | yes: Teradata Vantage                                                  |
+| Bring your own model (BYOM - deploy with no code via onnx, pmml, etc ) | out of the box - no, need customization                                                                                                     | yes                                                                    |
+| Deploy to spark                                                        | yes                                                                                                                                         | yes                                                                    |
+| Deploy to K8S                                                          | yes, over Azure                                                                                                                             | yes                                                                    |
+| Deploy to other clusters                                               | yes, with custom plugins                                                                                                                    | yes, with custom Jenkins workflow                                      |
+| **Model monitoring**                                                       |                                                                                                                                             |                                                                        |
+| Support model monitoring                                               | no, need 3rd party solution like [evidently.ai](https://evidentlyai.com)                                                                                               | yes                                                                    |
+| Feature drift                                                          | n/a                                                                                                                                         | yes                                                                    |
+| Prediction drift                                                       | n/a                                                                                                                                         | yes                                                                    |
+| Model performance                                                      | n/a                                                                                                                                         | yes                                                                    |
+| Alerting                                                               | n/a                                                                                                                                         | yes, with Prometheus                                                   |
+| **Extra items**                  |                                                                                                                                             |                                                                        |
+| Extensibility with plugins                                             | yes, can write plugins for:  Tracking Store<br>ArtifactRepository<br>Run context provider<br>Model Registry Store<br>MLFlow Project backend | no                                                                     |
+| Model hierarchy                                                        | no                                                                                                                                          | yes, can pack models into projects                                     |
+| Authentication                                                         | yes, only with databricks                                                                                                                   | yes, LDAP                                                              |
+| Access control                                                         | yes, only with databricks                                                                                                                   | yes                                                                    |
 
 
 

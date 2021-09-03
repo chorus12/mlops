@@ -192,6 +192,8 @@ This section describes how to specify Conda and Docker container environments in
 ## Running projects
 MLflow provides two ways to run projects: the mlflow run `command-line tool`, or the `mlflow.projects.run()`
 
+You can't run mlflowproject if `mlflowproject` file and `conda.env` aren't in repository root.
+
 To run project use this command:
 
 `mlflow run https://github.com/plaguedoctor39/mlflowproject-test -P depth=5`
@@ -203,3 +205,19 @@ Output:
 INFO mlflow.projects: === Run (ID '59e4456c246542988b6c478debd22f57') succeeded ===
 ```
 You can use run `mlflow ui` to see recorded run
+
+## Evidently + MLFlow
+You can use Evidently to calculate metrics, and MLflow Tracking to log and view the results
+### Overview
+Many machine learning teams use `MLflow` for experiment management, deployment, and as a model registry.  If you are already familiar with MLflow, you can integrate it with Evidently to ***track the performance of production models***. 
+
+In this case, you use `Evidently` to calculate the metrics and `MLflow` to log the results. You can then access the metrics in the `MLflow` interface. 
+### How it works
+Evidently calculates a rich set of metrics and statistical tests.
+You can choose any of the pre-built [reports](https://docs.evidentlyai.com/reports) to define the metrics you’d want to get. 
+ 
+You can then generate a JSON profile that will contain the defined metrics output. 
+You can combine several profile sections (e.g., Data and Prediction Drift together). 
+
+You might not always need all metrics from the profile. You should explicitly define which parts of the output to send to MLflow Tracking.   
+=======

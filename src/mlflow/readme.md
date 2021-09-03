@@ -220,4 +220,3 @@ You can then generate a JSON profile that will contain the defined metrics outpu
 You can combine several profile sections (e.g., Data and Prediction Drift together). 
 
 You might not always need all metrics from the profile. You should explicitly define which parts of the output to send to MLflow Tracking.   
-=======
